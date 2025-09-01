@@ -122,13 +122,40 @@ export default function Tasks({ actionData, loaderData }: Route.ComponentProps) 
           <div className="space-y-3">
             {tasks.map((task) => (
               <div key={task.id} className="bg-white rounded-lg shadow-sm border p-4">
-                <h3 className="font-medium text-gray-900">{task.title}</h3>
-                {task.description && (
-                  <p className="mt-1 text-sm text-gray-600">{task.description}</p>
-                )}
-                <p className="text-xs text-gray-400 mt-2">
-                  Created: {new Date(task.createdAt).toLocaleDateString()}
-                </p>
+                <div className="flex items-start justify-between">
+                  <div className="flex-1">
+                    <h3 className="font-medium text-gray-900">{task.title}</h3>
+                    {task.description && (
+                      <p className="mt-1 text-sm text-gray-600">{task.description}</p>
+                    )}
+                    <p className="text-xs text-gray-400 mt-2">
+                      Created: {new Date(task.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
+                  
+                  <div className="flex items-center space-x-2 ml-4">
+                    <a
+                      href={`/tasks/${task.id}/edit`}
+                      className="px-3 py-1 bg-blue-100 text-blue-700 rounded text-sm hover:bg-blue-200"
+                    >
+                      Edit
+                    </a>
+                    
+                    <Form method="post" action={`/tasks/${task.id}/delete`}>
+                      <button
+                        type="submit"
+                        className="px-3 py-1 bg-red-100 text-red-700 rounded text-sm hover:bg-red-200"
+                        onClick={(e) => {
+                          if (!confirm('Are you sure you want to delete this task?')) {
+                            e.preventDefault();
+                          }
+                        }}
+                      >
+                        Delete
+                      </button>
+                    </Form>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
