@@ -3,7 +3,7 @@ import { redirect } from "react-router";
 import { eq } from "drizzle-orm";
 import type { Route } from "./+types/tasks.$taskId.delete";
 
-export async function action({ params, context }: { params: { taskId: string }, context: { db: any } }) {
+export async function action({ params, context }: Route.ActionArgs) {
   const taskId = parseInt(params.taskId);
   
   if (isNaN(taskId)) {

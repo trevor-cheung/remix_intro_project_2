@@ -111,18 +111,36 @@ export default function Tasks({ actionData, loaderData }: Route.ComponentProps) 
       </div>
       
       {/* Tasks List */}
-      <div className="space-y-4">
+      <div className="space-y-4 mb-4">
         <h2 className="text-xl font-semibold">Your Tasks</h2>
         
-        {tasks.length === 0 ? (
+        {tasks.filter((task) => task.completed === 0).length === 0 ? (
           <div className="text-center py-8 text-gray-500">
             <p>No tasks yet. Add your first task above!</p>
           </div>
         ) : (
           <div className="space-y-3">
-            {tasks.map((task) => (
+            {tasks.filter((task) => task.completed === 0).map((task) => (
+              // check box to toggle the task on the left side
               <div key={task.id} className="bg-white rounded-lg shadow-sm border p-4">
                 <div className="flex items-start justify-between">
+                  <div className="mr-4">
+                    <Form method="post" action={`/tasks/${task.id}/toggle`}>
+                      <button type="submit" className="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors bg-white border-gray-300 hover:border-green-500">
+                        {task.completed && (
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                              fillRule="evenodd"
+                    
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        )}
+                      </button>
+                    </Form>
+                  </div>
+
                   <div className="flex-1">
                     <h3 className="font-medium text-gray-900">{task.title}</h3>
                     {task.description && (
@@ -161,6 +179,59 @@ export default function Tasks({ actionData, loaderData }: Route.ComponentProps) 
           </div>
         )}
       </div>
+
+      {/* Completed Tasks */}
+      {tasks.filter((task) => task.completed === 1).length === 0 ? (
+        <div className="text-center py-8 text-gray-500">
+          <p>No completed tasks yet.</p>
+        </div>
+      ) : (
+        <div className="space-y-4 mb-4">
+        <h2 className="text-xl font-semibold">Completed Tasks</h2>
+        
+        {tasks.length === 0 ? (
+          <div className="text-center py-8 text-gray-500">
+            <p>No tasks yet. Add your first task above!</p>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            {tasks.filter((task) => task.completed === 1).map((task) => (
+              // check box to toggle the task on the left side
+              <div key={task.id} className="bg-white rounded-lg shadow-sm border p-4">
+                <div className="flex items-start justify-between">
+                  <div className="mr-4">
+                    <Form method="post" action={`/tasks/${task.id}/toggle`}>
+                      <button type="submit" className="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors bg-white border-gray-300 hover:border-green-500">
+                        {task.completed && (
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                              fillRule="evenodd"
+                    
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                        )}
+                      </button>
+                    </Form>
+                  </div>
+
+                  <div className="flex-1">
+                    <h3 className="font-medium text-gray-900">{task.title}</h3>
+                    {task.description && (
+                      <p className="mt-1 text-sm text-gray-600">{task.description}</p>
+                    )}
+                    <p className="text-xs text-gray-400 mt-2">
+                      Created: {new Date(task.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+      )}
     </div>
   );
 }

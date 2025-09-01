@@ -1,10 +1,10 @@
 import * as schema from "~/database/schema";
-import { Form, redirect } from "react-router";
+import { Form, redirect  } from "react-router";
 import { eq } from "drizzle-orm";
 import type { Route } from "./+types/tasks.$taskId.edit";
 
 // Loader to fetch the task for editing
-export async function loader({ params, context }: { params: { taskId: string }, context: { db: any } }) {
+export async function loader({ params, context }: Route.LoaderArgs) {
   const taskId = parseInt(params.taskId);
   
   if (isNaN(taskId)) {
@@ -23,7 +23,7 @@ export async function loader({ params, context }: { params: { taskId: string }, 
 }
 
 // Action to handle task updates
-export async function action({ params, request, context }: { params: { taskId: string }, request: Request, context: { db: any } }) {
+export async function action({ params, request, context }: Route.ActionArgs) {
   const taskId = parseInt(params.taskId);
   
   if (isNaN(taskId)) {
@@ -53,7 +53,7 @@ export async function action({ params, request, context }: { params: { taskId: s
   return redirect("/");
 }
 
-export default function EditTask({ actionData, loaderData }: { actionData?: { error?: string }, loaderData: { task: any } }) {
+export default function EditTask({ actionData, loaderData }: Route.ComponentProps) {
   const { task } = loaderData;
   const error = actionData?.error;
   
