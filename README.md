@@ -2,6 +2,14 @@
 
 A simple, intuitive todo application to help you organize your tasks and boost your productivity. Link to the app found here: https://5d599314-react-router-app.trevor-49c.workers.dev/
 
+Tech Stack:
+- React Router / Remix
+- Cloudflare D1
+- Cloudflare Workers
+- Better Auth
+- Tailwind CSS
+- Drizzle ORM
+
 ## �� What This App Does
 
 The Todo App helps you:
