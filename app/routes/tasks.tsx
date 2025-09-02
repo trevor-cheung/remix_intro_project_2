@@ -3,6 +3,7 @@ import { Form, useNavigation, redirect } from "react-router";
 
 import type { Route } from "./+types/tasks";
 import { Welcome } from "../welcome/welcome";
+import { authClient } from "../lib/auth-client";
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -19,10 +20,18 @@ export async function action({ request, context }: Route.ActionArgs) {
   if (!title?.trim()) {
     return { error: "Title is required" };
   }
+
+  // Get the current session to access user info
+  const session = await context.auth.api.getSession(request);
+  
+  if (!session) {
+    return redirect("/signin");
+  }
   
   try {
     await context.db.insert(schema.tasks).values({
       title: title.trim(),
+      userId: session.user.id, // Access user ID from session
       description: description?.trim() || null,
     });
   } catch (error) {
@@ -32,8 +41,16 @@ export async function action({ request, context }: Route.ActionArgs) {
   return redirect("/");
 }
 
-export async function loader({ context }: Route.LoaderArgs) {
+export async function loader({ context, request }: Route.LoaderArgs) {
+  // Get user ID to filter tasks
+  const session = await context.auth.api.getSession(request);
+  
+  if (!session) {
+    return redirect("/signin");
+  }
+
   const tasks = await context.db.query.tasks.findMany({
+    where: (tasks, { eq }) => eq(tasks.userId, session.user.id),
     orderBy: (tasks, { desc }) => [desc(tasks.createdAt)],
   });
 
@@ -48,10 +65,31 @@ export default function Tasks({ actionData, loaderData }: Route.ComponentProps) 
   const error = actionData?.error;
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
+
+  const signOut = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          window.location.href = "/signin";
+        },
+      },
+    });
+  };
   
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-white-900 mb-8">Trevor's Todo App</h1>
+      {/* Header with title and sign out */}
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold text-white-900">Trevor's Todo App</h1>
+        <Form method="post" onSubmit={signOut}>
+          <button
+            type="submit"
+            className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-sm font-medium"
+          >
+            Sign Out
+          </button>
+        </Form>
+      </div>
       
       {/* Add Task Form */}
       <div className="bg-white rounded-lg shadow-md p-6 mb-8">
