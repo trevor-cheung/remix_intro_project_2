@@ -51,11 +51,11 @@ export default function Tasks({ actionData, loaderData }: Route.ComponentProps) 
   
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">My Todo App</h1>
+      <h1 className="text-3xl font-bold text-white-900 mb-8">Trevor's Todo App</h1>
       
       {/* Add Task Form */}
       <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-        <h2 className="text-xl font-semibold mb-4">Add New Task</h2>
+        <h2 className="text-xl text-gray-700 font-semibold mb-4">Add New Task</h2>
         <Form 
           method="post" 
           className="space-y-4"
@@ -127,7 +127,7 @@ export default function Tasks({ actionData, loaderData }: Route.ComponentProps) 
                   <div className="mr-4">
                     <Form method="post" action={`/tasks/${task.id}/toggle`}>
                       <button type="submit" className="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors bg-white border-gray-300 hover:border-green-500">
-                        {task.completed && (
+                        {(
                           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path
                               fillRule="evenodd"
@@ -201,9 +201,11 @@ export default function Tasks({ actionData, loaderData }: Route.ComponentProps) 
                 <div className="flex items-start justify-between">
                   <div className="mr-4">
                     <Form method="post" action={`/tasks/${task.id}/toggle`}>
-                      <button type="submit" className="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors bg-white border-gray-300 hover:border-green-500">
-                        {task.completed && (
-                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                      <button type="submit" className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors 
+      ${task.completed ? "bg-green-500 border-green-500 hover:border-red-500" : "bg-white border-gray-300 hover:border-green-500"}
+    `}>
+                        {task.completed === 1 && (
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" >
                             <path
                               fillRule="evenodd"
                     
