@@ -3,41 +3,6 @@
   "dialect": "sqlite",
   "entries": [
     {
-      "idx": 0,
-      "version": "6",
-      "when": 1732083994982,
-      "tag": "0000_outstanding_trauma",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "6",
-      "when": 1756652558033,
-      "tag": "0001_chunky_lady_vermin",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "6",
-      "when": 1756787769875,
-      "tag": "0002_modern_husk",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "6",
-      "when": 1756825444466,
-      "tag": "0003_bent_micromax",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "6",
-      "when": 1756825654309,
-      "tag": "0004_brave_sebastian_shaw",
-      "breakpoints": true
-    },
-    {
       "idx": 5,
       "version": "6",
       "when": 1756825788981,

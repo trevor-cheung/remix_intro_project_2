@@ -1,91 +1,75 @@
-# Welcome to React Router!
+# Todo App - User Guide
 
-A modern, production-ready template for building full-stack React applications using React Router.
+A simple, intuitive todo application to help you organize your tasks and boost your productivity.
 
-## Features
+## �� What This App Does
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+The Todo App helps you:
+- **Create tasks** with titles and descriptions
+- **Track progress** by marking tasks as complete
+- **Organize work** with a clean, simple interface
+- **Access anywhere** - your tasks are saved in the cloud
+- **Stay focused** with a distraction-free design
 
-## Getting Started
+## 🚀 Getting Started
 
-### Installation
+### First Time Setup
 
-Install the dependencies:
+1. **Create an account**
+   - Click "Sign up" on the login page
+   - Enter your email and choose a password
+   - Click "Create account"
 
-```bash
-npm install
-```
+2. **Sign in**
+   - Use your email and password to sign in
+   - You'll be taken to your main tasks page
 
-### Development
+### Using the App
 
-Run an initial database migration:
+#### �� Creating Tasks
 
-```bash
-npm run db:migrate
-```
+1. **On the main page**, you'll see the "Add New Task" form
+2. **Enter a task title** (required) - this is what you need to do
+3. **Add a description** (optional) - extra details about the task
+4. **Click "Add Task"** - your task appears in the "Your Tasks" list
 
-Start the development server with HMR:
+#### ✅ Managing Tasks
 
-```bash
-npm run dev
-```
+**Mark as Complete:**
+- Click the circular checkbox on the left of any task
+- The task moves to the "Completed Tasks" section
 
-Your application will be available at `http://localhost:5173`.
+**Edit a Task:**
+- Click the blue "Edit" button on any task
+- Make your changes and save
 
-## Building for Production
+**Delete a Task:**
+- Click the red "Delete" button
+- Confirm you want to delete it
 
-Create a production build:
+#### 📱 Navigation
 
-```bash
-npm run build
-```
+- **Main Page** (`/`) - View and manage all your tasks
+- **Sign In** (`/signin`) - Access your account
+- **Sign Up** (`/signup`) - Create a new account
 
-## Deployment
+## �� Account Management
 
-Deployment is done using the Wrangler CLI.
+### Signing Out
+- Click the red "Sign Out" button in the top-right corner
+- You'll be taken back to the sign-in page
 
-First, you need to create a d1 database in Cloudflare.
+### Security
+- Your tasks are private and only visible to you
+- Sign out when using shared computers
+- Your data is securely stored in the cloud
 
-```sh
-npx wrangler d1 create <name-of-your-database>
-```
+## 💡 Tips for Best Use
 
-Be sure to update the `wrangler.toml` file with the correct database name and id.
+1. **Keep titles short** - Use clear, action-oriented titles
+2. **Use descriptions** - Add context for complex tasks
+3. **Mark tasks complete** - Celebrate progress and stay motivated
+4. **Regular cleanup** - Delete completed tasks you no longer need
+5. **Sign out** - Always sign out on shared devices
 
-You will also need to [update the `drizzle.config.ts` file](https://orm.drizzle.team/docs/guides/d1-http-with-drizzle-kit), and then run the production migration:
-
-```sh
-npm run db:migrate-production
-```
-
-To build and deploy directly to production:
-
-```sh
-npm run deploy
-```
-
-To deploy a preview URL:
-
-```sh
-npx wrangler versions upload
-```
-
-You can then promote a version to production after verification or roll it out progressively.
-
-```sh
-npx wrangler versions deploy
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+**Happy organizing!** 🎉
